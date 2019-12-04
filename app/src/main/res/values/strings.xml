@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TReking_GPS</string>
+    <string name="send_dutton_name">Отправить</string>
+    <string name="edit_text_hint">Введите сообщение</string>
+</resources>
