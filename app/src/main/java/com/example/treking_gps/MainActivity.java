@@ -1,10 +1,6 @@
 package com.example.treking_gps;
 
-import android.Manifest;
-import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,16 +16,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.tbruyelle.rxpermissions2.Permission;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
-import pl.charmas.android.reactivelocation2.ReactiveLocationProvider;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,25 +50,21 @@ public class MainActivity extends AppCompatActivity {
         mMessageRecycler.setAdapter(dataAdapter);
 
 
-        mSendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mSendButton.setOnClickListener(v -> {
+            String mag = mEditTextMessage.getText().toString();
 
-                String mag = mEditTextMessage.getText().toString();
-
-                if (mag.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Введите сообщение!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                if (mag.length() == MAX_MESSAGE_LENGTH) {
-                    Toast.makeText(getApplicationContext(), "Слишком длиное сообщение", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-
-                myRef.push().setValue(mag);
-                mEditTextMessage.setText("");
+            if (mag.equals("")) {
+                Toast.makeText(getApplicationContext(), "Введите сообщение!", Toast.LENGTH_LONG).show();
+                return;
             }
+            if (mag.length() == MAX_MESSAGE_LENGTH) {
+                Toast.makeText(getApplicationContext(), "Слишком длиное сообщение", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+
+            myRef.push().setValue(mag);
+            mEditTextMessage.setText("");
         });
 
 
@@ -116,56 +100,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        requestPermissions();
-    }
-
-    private void requestPermissions() {
-        List<Permission> permissions = new ArrayList<>();
-
-        new RxPermissions(this)
-                .requestEach(
-                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                )
-                .subscribe(new DisposableObserver<Permission>() {
-                    @Override
-                    public void onNext(Permission permission) {
-                        permissions.add(permission);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        checkPermissions(permissions);
-                    }
-                });
-    }
-
-    private void checkPermissions(List<Permission> permissions) {
-        for (Permission item: permissions) {
-            Log.d(item.name, "granted: "+item.granted);
-        }
-        startRequestLocation();
-    }
-
-    private void startRequestLocation() {
-        ReactiveLocationProvider locationProvider =  new  ReactiveLocationProvider (context);
-        locationProvider.getLastKnownLocation()
-                .subscribeOn(Schedulers.io())               // use I/O thread to query for addresses
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer <Location>() {
-                    @Override
-                    public void call(Location location) {
-                        doSthImportantWithObtainedLocation(location);
-                    }
-                });
-    }
 }

@@ -8,4 +8,54 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+
+    <style name="AppTheme.CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">@dimen/CardCornerRadius</item>
+    </style>
+
+
+    <style name="AppTheme.GuidelineTop" parent="AppTheme.BaseView">
+        <item name="android:id">@id/guidelineTop</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="layout_constraintGuide_begin">@dimen/SpaceMiddle</item>
+    </style>
+
+    <style name="AppTheme.GuidelineBottom" parent="AppTheme.BaseView">
+        <item name="android:id">@id/guidelineBottom</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="layout_constraintGuide_end">@dimen/SpaceMiddle</item>
+    </style>
+
+    <style name="AppTheme.GuidelineStart" parent="AppTheme.BaseView">
+        <item name="android:id">@id/guidelineStart</item>
+        <item name="android:orientation">vertical</item>
+        <item name="layout_constraintGuide_begin">@dimen/SpaceMiddle</item>
+    </style>
+
+    <style name="AppTheme.GuidelineEnd" parent="AppTheme.BaseView">
+        <item name="android:id">@id/guidelineStart</item>
+        <item name="android:orientation">vertical</item>
+        <item name="layout_constraintGuide_end">@dimen/SpaceMiddle</item>
+    </style>
+
+    <style name="AppTheme.GuidelineCenterV" parent="AppTheme.BaseView">
+        <item name="android:id">@id/guidelineCenterV</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="layout_constraintGuide_percent">0.5</item>
+    </style>
+
+    <style name="AppTheme.GuidelineCenterH" parent="AppTheme.BaseView">
+        <item name="android:id">@id/guidelineCenterH</item>
+        <item name="android:orientation">vertical</item>
+        <item name="layout_constraintGuide_percent">0.5</item>
+    </style>
+
+    <style name="AppTheme.BaseView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
