@@ -62,6 +62,7 @@ public class LocationWorker extends RxWorker {
     private Observable<Boolean> handleLocation(Location location) {
         String timeStamp = timeFormatter.format(new Date());
         Logger.log(TAG, "at "+ timeStamp + "  "+ location.toString());
+        //TODO make handle location, such as send to the server
         return Observable.just(true);
     }
 }
