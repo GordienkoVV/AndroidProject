@@ -9,6 +9,11 @@ import androidx.work.WorkerParameters;
 
 import com.google.android.gms.location.LocationRequest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,6 +22,8 @@ import pl.charmas.android.reactivelocation2.ReactiveLocationProvider;
 
 public class LocationWorker extends RxWorker {
 
+    private final static String TAG = LocationWorker.class.getSimpleName();
+    private DateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
     /**
      * @param appContext   The application {@link Context}
@@ -29,6 +36,9 @@ public class LocationWorker extends RxWorker {
     @NonNull
     @Override
     public Single<Result> createWork() {
+        String timeStamp = timeFormatter.format(new Date());
+        Logger.log(TAG, "CreateWork at "+timeStamp);
+
         return requestLocation()
                 .flatMap(this::handleLocation)
                 .subscribeOn(Schedulers.io())
@@ -50,7 +60,8 @@ public class LocationWorker extends RxWorker {
     }
 
     private Observable<Boolean> handleLocation(Location location) {
-        Logger.log("Location", location.toString());
+        String timeStamp = timeFormatter.format(new Date());
+        Logger.log(TAG, "at "+ timeStamp + "  "+ location.toString());
         return Observable.just(true);
     }
 }
