@@ -5,6 +5,11 @@
     <dimen name="SpaceSmall">8dp</dimen>
     <dimen name="SpaceTiny">4dp</dimen>
 
+    <dimen name="IconLarge">96dp</dimen>
+    <dimen name="IconMiddle">48dp</dimen>
+    <dimen name="IconSmall">24dp</dimen>
+    <dimen name="IconTiny">16dp</dimen>
+
     <dimen name="ButtonHeight">56dp</dimen>
 
     <dimen name="CardCornerRadius">4dp</dimen>

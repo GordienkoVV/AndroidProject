@@ -4,33 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="RtlCompat">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/message_recycler"
-        android:layout_width="452dp"
-        android:layout_height="470dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/edit_text_hint"
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/message_input"
-            android:textSize="24dp" />
-
-        <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/ButtonHeight"
+            android:layout_marginStart="@dimen/SpaceMiddle"
+            android:layout_marginEnd="@dimen/ButtonHeight"
+            android:hint="@string/edit_text_hint"
+            android:lines="1" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/send_message_b"
-            android:text="@string/send_dutton_name"
-            android:textSize="24dp" />
-    </LinearLayout>
+            android:layout_width="@dimen/ButtonHeight"
+            android:layout_height="@dimen/ButtonHeight"
+            android:layout_gravity="center_vertical|end"
+            android:background="?selectableItemBackgroundBorderless"
+            android:tint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_send_black_24dp" />
+
+    </FrameLayout>
 
 </LinearLayout>
