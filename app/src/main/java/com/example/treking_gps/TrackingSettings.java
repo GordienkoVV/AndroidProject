@@ -1,7 +1,11 @@
 package com.example.treking_gps;
 
 import android.Manifest;
+import android.content.Context;
 import android.os.Build;
+
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -17,13 +21,22 @@ public final class TrackingSettings extends FragmentButterKnife {
 
     @OnClick(R.id.startTrackingButton)
     protected void startTracking() {
-        requestPermissions();
-    }
-
-    private void requestPermissions() {
         new RxPermissions(this)
                 .request(getPermissionNames())
+                .filter(Boolean::booleanValue)
+                .doOnNext(value -> startWorker())
                 .subscribe(new SimpleObserver<>("RequestLocationPermissions"));
+    }
+
+    private void startWorker() {
+        Context context = getContext();
+        if (context == null) return;
+
+        OneTimeWorkRequest uploadWorkRequest = new OneTimeWorkRequest.Builder(LocationWorker.class)
+                .build();
+
+        WorkManager.getInstance(context)
+                .enqueue(uploadWorkRequest);
     }
 
     private String[] getPermissionNames() {
