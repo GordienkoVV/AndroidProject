@@ -2,4 +2,8 @@
     <string name="app_name">TReking_GPS</string>
     <string name="send_dutton_name">Отправить</string>
     <string name="edit_text_hint">Введите сообщение</string>
+
+    <string name="tracking_settings_title">Настройки отслеживания положения</string>
+    <string name="tracking_start">Включить</string>
+    <string name="tracking_stop">Отключить</string>
 </resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="RtlCompat">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/message_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/message_input"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ButtonHeight"
+            android:layout_marginStart="@dimen/SpaceMiddle"
+            android:layout_marginEnd="@dimen/ButtonHeight"
+            android:hint="@string/edit_text_hint"
+            android:lines="1" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/send_message_b"
+            android:layout_width="@dimen/ButtonHeight"
+            android:layout_height="@dimen/ButtonHeight"
+            android:layout_gravity="center_vertical|end"
+            android:background="?selectableItemBackgroundBorderless"
+            android:tint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_send_black_24dp" />
+
+    </FrameLayout>
+
+</LinearLayout>

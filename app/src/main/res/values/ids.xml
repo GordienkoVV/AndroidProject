@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="titleView" type="id" />
+    <item name="subtitleView" type="id" />
+    <item name="imageView" type="id" />
+    <item name="textView" type="id" />
+    <item name="dividerView" type="id" />
+
+    <item name="guidelineTop" type="id" />
+    <item name="guidelineBottom" type="id" />
+    <item name="guidelineStart" type="id" />
+    <item name="guidelineEnd" type="id" />
+    <item name="guidelineDivider" type="id" />
+    <item name="guidelineCenterH" type="id" />
+    <item name="guidelineCenterV" type="id" />
+</resources>
