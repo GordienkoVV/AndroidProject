@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@id/titleView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/tracking_settings_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintTop_toTopOf="@id/guidelineTop"
-        />
+    <include
+        android:id="@id/appbar"
+        layout="@layout/base_toolbar" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/startTrackingButton"
+        style="@style/AppTheme.MaterialButton"
+        android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="@dimen/ButtonHeight"
         android:text="@string/tracking_start"
+        app:backgroundTint="@color/positive"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintTop_toBottomOf="@id/titleView"
+        app:layout_constraintTop_toBottomOf="@id/appbar"
         app:layout_constraintBottom_toTopOf="@id/stopTrackingButton"
         app:layout_constraintVertical_chainStyle="packed"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/stopTrackingButton"
+        style="@style/AppTheme.MaterialButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/ButtonHeight"
         android:text="@string/tracking_stop"
+        app:backgroundTint="@color/negative"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintTop_toBottomOf="@id/startTrackingButton"
@@ -45,6 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="10"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
@@ -52,10 +52,6 @@
         app:layout_constraintVertical_bias="1"
         />
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@id/guidelineTop"
-        style="@style/AppTheme.GuidelineTop" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@id/guidelineBottom"
