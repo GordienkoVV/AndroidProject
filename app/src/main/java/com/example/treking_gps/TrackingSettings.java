@@ -1,22 +1,16 @@
 package com.example.treking_gps;
 
 import android.Manifest;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkInfo;
-import androidx.work.WorkManager;
+import androidx.appcompat.widget.Toolbar;
 
-import com.annimon.stream.Stream;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,13 +18,11 @@ import butterknife.OnClick;
 public final class TrackingSettings extends FragmentButterKnife {
 
     private static String TAG = TrackingSettings.class.getSimpleName();
-    private static String TRACKER_WORKER = "tracker_worker";
 
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
     @BindView(R.id.statusView)
     protected TextView statusView;
-
-    private WorkManager workManager;
-
 
     @Override
     protected int getLayoutId() {
@@ -40,29 +32,26 @@ public final class TrackingSettings extends FragmentButterKnife {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = getContext();
-        workManager = WorkManager.getInstance(context);
-        startLocationWorkerStateListening();
+        listeningWorkerState();
     }
 
-    private void startLocationWorkerStateListening() {
-        workManager.getWorkInfosForUniqueWorkLiveData(TRACKER_WORKER)
-                .observe(this, this::onLocationWorkerStatusChanged);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        toolbar.setTitle(R.string.tracking_settings_title);
     }
 
-    private void onLocationWorkerStatusChanged(List<WorkInfo> items) {
-        if (items == null || items.isEmpty()) {
-            Logger.log(TAG, "Has no info about tracking worker");
-            return;
-        }
+    private void listeningWorkerState() {
+        StarterWorker.getEnabledLiveData(getContext())
+                .observe(this, this::onWorkerEnabledChanged);
+    }
 
-        String logText = Stream.of(items)
-                .map(WorkInfo::toString)
-                .reduce((value1, value2) -> value1+"\n"+value2)
-                .orElse("");
+    private void onWorkerEnabledChanged(Boolean value) {
+        String statusText = value != null && value
+                ? getString(R.string.enabled)
+                : getString(R.string.disabled);
 
-        Logger.log(TAG, "WorkerInfo: "+ logText);
-        statusView.setText(logText);
+        statusView.setText(statusText);
     }
 
     @OnClick(R.id.startTrackingButton)
@@ -90,27 +79,12 @@ public final class TrackingSettings extends FragmentButterKnife {
     }
 
     private void startWorker() {
-        workManager.enqueueUniquePeriodicWork(
-                TRACKER_WORKER,
-                ExistingPeriodicWorkPolicy.REPLACE,
-                createLocationWorkRequest()
-        );
-    }
-
-    private PeriodicWorkRequest createLocationWorkRequest() {
-//        Constraints constraints = new Constraints.Builder()
-//                .setRequiredNetworkType(NetworkType.CONNECTED)
-//                .build();
-
-        return new PeriodicWorkRequest.Builder(StarterWorker.class, 900_000L, TimeUnit.SECONDS)
-//                        .setConstraints(constraints)
-                        .build();
+        StarterWorker.start(getContext());
     }
 
     @OnClick(R.id.stopTrackingButton)
     protected void stopTracking() {
-        StarterWorker.stopAllSubWorkers(getContext());
-        workManager.cancelUniqueWork(TRACKER_WORKER);
+        StarterWorker.stopAll(getContext());
     }
 
 }
