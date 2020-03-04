@@ -8,6 +8,8 @@ import androidx.work.RxWorker;
 import androidx.work.WorkerParameters;
 
 import com.google.android.gms.location.LocationRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,7 +24,14 @@ import pl.charmas.android.reactivelocation2.ReactiveLocationProvider;
 
 public class LocationWorker extends RxWorker {
 
+
+    /**
+     * private ArrayList<String> messages1 = new ArrayList<>();
+     */
+
     private final static String TAG = LocationWorker.class.getSimpleName();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef1 = database.getReference("messages");
     private DateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
     /**
@@ -62,6 +71,12 @@ public class LocationWorker extends RxWorker {
     private Observable<Boolean> handleLocation(Location location) {
         String timeStamp = timeFormatter.format(new Date());
         Logger.log(TAG, "at "+ timeStamp + "  "+ location.toString());
+
+
+        myRef1.push().setValue(location.getLatitude() + ", " + location.getLongitude()+ ", 19");
+
+
+
 
         //TODO make handle location, such as send to the server
 
