@@ -43,6 +43,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -52,13 +53,13 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
 
-    implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
     //noinspection LifecycleAnnotationProcessorWithJava8
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"
 
     implementation 'com.annimon:stream:1.2.1'
 
@@ -67,11 +68,9 @@ dependencies {
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'pl.charmas.android:android-reactive-location2:2.1@aar'
 
-    implementation "androidx.work:work-runtime:2.2.0"
-    implementation "androidx.work:work-rxjava2:2.2.0"
-    implementation "androidx.work:work-gcm:2.2.0"
-    // Kotlin + coroutines
-    //implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "androidx.work:work-runtime:2.3.4"
+    implementation "androidx.work:work-rxjava2:2.3.4"
+    implementation "androidx.work:work-gcm:2.3.4"
 
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
@@ -80,10 +79,10 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:1.6.1"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:1.6.1"
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation "androidx.work:work-testing:2.2.0"
+    androidTestImplementation "androidx.work:work-testing:2.3.4"
 }
 
 apply plugin: 'com.google.gms.google-services'
