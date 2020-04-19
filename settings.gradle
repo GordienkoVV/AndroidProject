@@ -1,3 +1,3 @@
 include ':app'
 rootProject.name='TReking_GPS'
-include ':maps'
+include ':customer'
