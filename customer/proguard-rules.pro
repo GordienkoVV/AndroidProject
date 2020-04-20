@@ -19,7 +19,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.tracking.observer.** { *; }
 -keepnames class com.tracking.observer..** { *; }
+-keepclassmembers class com.tracking.observer.** { private <fields>; }
+
+##--------- Firebase ------------------
+-dontwarn com.google.android.gms.internal.**
+-keepattributes EnclosingMethod
+-keepattributes InnerClasses
+-keep class com.firebase.** { *; }
+-keep class com.google.android.gms.internal.** { *; }
+-keep class com.google.android.gms.maps.** { *; }
+##--------- end Firebase --------------
 
 
 ##---------------Begin: Glide  ----------
