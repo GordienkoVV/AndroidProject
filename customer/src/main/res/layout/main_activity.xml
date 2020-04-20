@@ -9,7 +9,7 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:tag="mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:name="com.tracking.observer.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
