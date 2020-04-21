@@ -1,7 +1,8 @@
-package com.tracking.observer
+package com.tracking.observer.ui
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.tracking.observer.R
 
 class MainActivity : FragmentActivity() {
 

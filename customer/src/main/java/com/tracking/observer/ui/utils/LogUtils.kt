@@ -1,7 +1,8 @@
-package com.tracking.observer
+package com.tracking.observer.ui.utils
 
 import android.util.Log
 import com.google.gson.Gson
+import com.tracking.observer.BuildConfig
 
 object LogUtils {
     private const val NULL = "<NULL>"

@@ -2,7 +2,7 @@ package com.tracking.observer.app
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import com.tracking.observer.LogUtils
+import com.tracking.observer.ui.utils.LogUtils
 import io.reactivex.plugins.RxJavaPlugins
 
 class App : MultiDexApplication() {
