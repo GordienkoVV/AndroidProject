@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "528213324594",
+    "firebase_url": "https://trekinggps-4cb2e.firebaseio.com",
+    "project_id": "trekinggps-4cb2e",
+    "storage_bucket": "trekinggps-4cb2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528213324594:android:76590715f6fbcd9d20dd2b",
+        "android_client_info": {
+          "package_name": "com.example.trekinggps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528213324594-cg7472uhtjv11fmni14m5agmnrh2un3h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trekinggps",
+            "certificate_hash": "7fd70ea01b3b0baf324442b26a99f239158e5010"
+          }
+        },
+        {
+          "client_id": "528213324594-iee0akct9ub4un583lbk11a5jmgf4k9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALSx83-umQGkOlPHLZ-nQ8bv04RItg15o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528213324594-iee0akct9ub4un583lbk11a5jmgf4k9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528213324594:android:18b62cfd3c08024920dd2b",
+        "android_client_info": {
+          "package_name": "com.tracking.observer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528213324594-iee0akct9ub4un583lbk11a5jmgf4k9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALSx83-umQGkOlPHLZ-nQ8bv04RItg15o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528213324594-iee0akct9ub4un583lbk11a5jmgf4k9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

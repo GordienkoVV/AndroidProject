@@ -6,4 +6,7 @@
     <string name="tracking_settings_title">Настройки отслеживания положения</string>
     <string name="tracking_start">Включить</string>
     <string name="tracking_stop">Отключить</string>
+
+    <string name="enabled">Включено</string>
+    <string name="disabled">Отключено</string>
 </resources>
