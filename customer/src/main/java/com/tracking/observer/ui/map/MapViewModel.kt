@@ -2,6 +2,7 @@ package com.tracking.observer.ui.map
 
 import androidx.lifecycle.ViewModel
 import com.tracking.observer.ui.SimpleViewState
+import com.tracking.observer.ui.utils.LogUtils
 import com.tracking.observer.ui.utils.subscribeWithDisposable
 import com.tracking.observer.ui.utils.threadsIOtoUI
 import io.reactivex.Observable
@@ -15,8 +16,11 @@ class MapViewModel : ViewModel() {
     private var pointsDisposable: Disposable? = null
 
     init {
-        pointsDisposable = Observable.timer(5, TimeUnit.SECONDS)
-                .flatMap { createFakePoints().toObservable() }
+        pointsDisposable = Observable.interval(3, TimeUnit.SECONDS)
+                .doOnNext {
+                    LogUtils.log("Timer", "emmit signal $it")
+                }
+                .flatMap { getGeoPoints().toObservable() }
                 .threadsIOtoUI()
                 .doOnSubscribe { viewState.loading.value = true }
                 .doOnTerminate { viewState.loading.value = false }
@@ -25,33 +29,36 @@ class MapViewModel : ViewModel() {
                 .subscribeWithDisposable()
     }
 
-    private fun createFakePoints(): Single<List<GeoPoint>> {
+    private fun getGeoPoints() = Single.fromPublisher<List<GeoPoint>> {
         // TODO replace to get real data
-        return Single.fromCallable {
-            listOf(
-                    GeoPoint(
-                            id = "1",
-                            title = "19",
-                            type = "trolley_bus",
-                            latitude = 46.843597,
-                            longitude = 29.627806
-                    ),
-                    GeoPoint(
-                            id = "2",
-                            title = "2",
-                            type = "minibus",
-                            latitude = 46.827697,
-                            longitude = 29.631506
-                    ),
-                    GeoPoint(
-                            id = "3",
-                            title = "2",
-                            type = "trolley_bus",
-                            latitude = 46.830000,
-                            longitude = 29.647200
-                    )
-            )
-        }
+        val items = createFakePoints()
+        it.onNext(items)
+    }
+
+    private fun createFakePoints(): List<GeoPoint> {
+        return listOf(
+                GeoPoint(
+                        id = "1",
+                        title = "19",
+                        type = "trolley_bus",
+                        latitude = 46.843597,
+                        longitude = 29.627806
+                ),
+                GeoPoint(
+                        id = "2",
+                        title = "2",
+                        type = "minibus",
+                        latitude = 46.827697,
+                        longitude = 29.631506
+                ),
+                GeoPoint(
+                        id = "3",
+                        title = "2",
+                        type = "trolley_bus",
+                        latitude = 46.830000,
+                        longitude = 29.647200
+                )
+        )
     }
 
     override fun onCleared() {
