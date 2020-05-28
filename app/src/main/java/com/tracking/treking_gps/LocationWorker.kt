@@ -77,7 +77,6 @@ class LocationWorker
 //        myRef1.push().setValue(pointJson)
         true
     }
-
     companion object {
         private val TAG = LocationWorker::class.java.simpleName
     }

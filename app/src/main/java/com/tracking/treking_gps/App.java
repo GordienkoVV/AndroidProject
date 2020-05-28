@@ -20,7 +20,6 @@ public class App extends MultiDexApplication {
             LeakCanary.install(this);
         }
     }
-
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
