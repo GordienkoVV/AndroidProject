@@ -1,58 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="360dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/startTrackingButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:layout_constraintVertical_bias="1.0" />
 
     <include
         android:id="@id/appbar"
         layout="@layout/base_toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/transportNameInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/SpaceMiddle"
+        app:layout_constraintTop_toBottomOf="@id/appbar"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/transportNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/transportName"
+            tools:text="example value"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/transportTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/SpaceMiddle"
+        android:text="@string/transport_type"
+        android:textAppearance="@style/AppTheme.TextAppearance.Caption"
+        app:layout_constraintTop_toBottomOf="@+id/transportNameInputLayout"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_bias="0"
+        />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/transportTypeSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/SpaceTiny"
+        app:layout_constraintTop_toBottomOf="@id/transportTypeLabel"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+         />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/transportRouteNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/SpaceMiddle"
+        android:textAppearance="@style/AppTheme.TextAppearance.Caption"
+        android:text="@string/route_number_label"
+        app:layout_constraintTop_toBottomOf="@id/transportTypeSpinner"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_bias="0"
+        />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/transportRouteNumberSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/SpaceTiny"
+        app:layout_constraintTop_toBottomOf="@id/transportRouteNumberLabel"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintHorizontal_bias="0"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/startTrackingButton"
         style="@style/AppTheme.MaterialButton"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="@dimen/SpaceMiddle"
         android:gravity="center"
         android:text="@string/tracking_start"
         android:textSize="14sp"
         app:backgroundTint="@color/positive"
-        app:layout_constraintBottom_toTopOf="@+id/stopTrackingButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@id/transportRouteNumberSpinner"
+        app:layout_constraintBottom_toTopOf="@id/stopTrackingButton"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.5"
+        />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/stopTrackingButton"
         style="@style/AppTheme.MaterialButton"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:text="@string/tracking_stop"
         app:backgroundTint="@color/negative"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:layout_constraintVertical_bias="0.971" />
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/startTrackingButton"
+        app:layout_constraintBottom_toTopOf="@id/statusView"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.5"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/statusView"
@@ -62,15 +119,14 @@
         android:maxLines="10"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/stopTrackingButton"
-        app:layout_constraintVertical_bias="0.281" />
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@id/guidelineBottom"
-        style="@style/AppTheme.GuidelineBottom"
-        app:layout_constraintGuide_begin="770dp" />
+        style="@style/AppTheme.GuidelineBottom" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@id/guidelineStart"
@@ -79,49 +135,5 @@
     <androidx.constraintlayout.widget.Guideline
         android:id="@id/guidelineEnd"
         style="@style/AppTheme.GuidelineEnd" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="360dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:layout_constraintVertical_bias="0.954" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="176dp"
-        android:layout_height="36dp"
-        android:text="Номер маршрута:"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="176dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Вид транспорта:"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
