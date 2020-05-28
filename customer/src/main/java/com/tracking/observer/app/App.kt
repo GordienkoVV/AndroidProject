@@ -9,8 +9,6 @@ import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 
 class App : MultiDexApplication() {
 
-
-
     override fun onCreate() {
         super.onCreate()
         initRx()

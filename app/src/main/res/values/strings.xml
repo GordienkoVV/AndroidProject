@@ -9,4 +9,7 @@
 
     <string name="enabled">Включено</string>
     <string name="disabled">Отключено</string>
+    <string name="route_number_label">Номер маршрута:</string>
+    <string name="transport_type">Вид транспорта:</string>
+    <string name="transportName">Имя</string>
 </resources>

@@ -23,6 +23,18 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="AppTheme.TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
+
+    </style>
+
+    <style name="AppTheme.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+
+    </style>
+
+    <style name="AppTheme.TextAppearance.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+
+    </style>
+
 
     <style name="AppTheme.GuidelineTop" parent="AppTheme.BaseView">
         <item name="android:id">@id/guidelineTop</item>
