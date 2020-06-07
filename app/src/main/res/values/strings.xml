@@ -12,4 +12,42 @@
     <string name="route_number_label">Номер маршрута:</string>
     <string name="transport_type">Вид транспорта:</string>
     <string name="transportName">Имя</string>
+    <string-array name="view_array">
+    <item>Маршрутка</item>
+    <item>Троллейбус</item>
+</string-array>
+    <string-array name="number_m_array">
+        <item>1a</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4a</item>
+        <item>5</item>
+        <item>5a</item>
+        <item>6</item>
+        <item>7a</item>
+        <item>8</item>
+        <item>9</item>
+        <item>9a</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>12a</item>
+        <item>14a</item>
+        <item>15</item>
+        <item>16</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+
+    </string-array>
+    <string-array name="number_t_array">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>6</item>
+    <item>7</item>
+    <item>19</item>
+    <item>19a</item>
+    </string-array>
 </resources>

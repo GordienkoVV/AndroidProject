@@ -2,6 +2,9 @@ package com.tracking.treking_gps;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.contentLayout, fragment, fragment.getClass().getSimpleName())
                     .commit();
         }
+
     }
 
 }
