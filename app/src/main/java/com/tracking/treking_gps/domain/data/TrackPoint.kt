@@ -1,4 +1,4 @@
-package com.tracking.treking_gps.data
+package com.tracking.treking_gps.domain.data
 
 import java.util.*
 

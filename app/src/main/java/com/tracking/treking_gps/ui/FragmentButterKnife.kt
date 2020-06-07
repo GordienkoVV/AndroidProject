@@ -1,4 +1,4 @@
-package com.tracking.treking_gps
+package com.tracking.treking_gps.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

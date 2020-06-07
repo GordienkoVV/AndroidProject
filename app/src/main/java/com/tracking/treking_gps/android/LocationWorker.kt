@@ -1,14 +1,15 @@
-package com.tracking.treking_gps
+package com.tracking.treking_gps.android
 
 import android.content.Context
 import android.location.Location
 import androidx.work.RxWorker
 import androidx.work.WorkerParameters
 import com.google.android.gms.location.LocationRequest
-import com.google.firebase.database.FirebaseDatabase
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.tracking.treking_gps.data.TrackPoint
+import com.tracking.treking_gps.data.AppFacade
+import com.tracking.treking_gps.utils.Logger
+import com.tracking.treking_gps.domain.TrackPointDataSource
+import com.tracking.treking_gps.domain.UserSettingsDataSource
+import com.tracking.treking_gps.domain.data.TrackPoint
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,7 +17,6 @@ import io.reactivex.schedulers.Schedulers
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class LocationWorker
@@ -26,13 +26,11 @@ class LocationWorker
  */
 (appContext: Context, workerParams: WorkerParameters) : RxWorker(appContext, workerParams) {
 
+    private val userSettingsDataSource: UserSettingsDataSource = AppFacade.instance.getUserSettingsDataSource()
+    private val trackPointDataSource: TrackPointDataSource = AppFacade.instance.getTrackPointDataSource()
     private val locationProvider = ReactiveLocationProvider(appContext)
-    private val database = FirebaseDatabase.getInstance()
-    private val myRef1 = database.getReference("messages")
     private val timeFormatter: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ", Locale.getDefault())
-    private val gson = GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ssZ")
-            .create()
+
     private val locationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             .setNumUpdates(2)
@@ -60,22 +58,22 @@ class LocationWorker
         return locationProvider.getUpdatedLocation(locationRequest)
     }
 
-    private fun handleLocation(location: Location) = Observable.fromCallable {
-        val timeStamp = timeFormatter.format(Date())
-        Logger.log(TAG, "at $timeStamp  $location")
-
-        val trackerId = "bus2"
-        val point = TrackPoint(
-                type = "bus",
-                name = "19",
-                latitude = location.latitude,
-                longitude = location.longitude
-        )
-
-        val pointJson = gson.toJson(point)
-        myRef1.child(trackerId).setValue(pointJson)
-//        myRef1.push().setValue(pointJson)
-        true
+    private fun handleLocation(location: Location) = Observable.defer {
+        userSettingsDataSource.getUserSettings()
+                .filter { it.id.isNotBlank()
+                            && it.routeNumber.isNotBlank()
+                            && it.transportType.isNotBlank()
+                }
+                .flatMapSingle {
+                    val point = TrackPoint(
+                            type = it.transportType,
+                            name = it.routeNumber,
+                            latitude = location.latitude,
+                            longitude = location.longitude,
+                            time = Date()
+                    )
+                    trackPointDataSource.setTrack(it.id, point)
+                }.toObservable()
     }
     companion object {
         private val TAG = LocationWorker::class.java.simpleName

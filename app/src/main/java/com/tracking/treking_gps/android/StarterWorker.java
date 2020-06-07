@@ -1,4 +1,4 @@
-package com.tracking.treking_gps;
+package com.tracking.treking_gps.android;
 
 import android.content.Context;
 import android.os.Handler;
@@ -14,6 +14,8 @@ import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
+
+import com.tracking.treking_gps.utils.Logger;
 
 import java.util.concurrent.TimeUnit;
 
