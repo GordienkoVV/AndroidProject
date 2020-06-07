@@ -1,6 +1,8 @@
-package com.tracking.treking_gps;
+package com.tracking.treking_gps.utils;
 
 import android.util.Log;
+
+import com.tracking.treking_gps.BuildConfig;
 
 public final class Logger {
 

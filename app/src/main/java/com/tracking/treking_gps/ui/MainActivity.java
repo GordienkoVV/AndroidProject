@@ -1,12 +1,14 @@
-package com.tracking.treking_gps;
+package com.tracking.treking_gps.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.tracking.treking_gps.R;
+import com.tracking.treking_gps.ui.settings.TrackingSettingsFragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (getSupportFragmentManager().getFragments().isEmpty()) {
-            Fragment fragment = new TrackingSettings();
+            Fragment fragment = new TrackingSettingsFragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.contentLayout, fragment, fragment.getClass().getSimpleName())

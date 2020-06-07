@@ -1,10 +1,12 @@
-package com.tracking.treking_gps;
+package com.tracking.treking_gps.ui;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.tracking.treking_gps.R;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 

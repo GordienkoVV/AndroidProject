@@ -1,4 +1,6 @@
-package com.tracking.treking_gps;
+package com.tracking.treking_gps.utils;
+
+import com.tracking.treking_gps.utils.Logger;
 
 public class SimpleObserver<T> extends io.reactivex.observers.DisposableObserver<T> {
 
