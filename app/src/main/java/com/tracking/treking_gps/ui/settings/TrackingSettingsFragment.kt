@@ -3,10 +3,10 @@ package com.tracking.treking_gps.ui.settings
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import butterknife.BindView
@@ -16,7 +16,7 @@ import com.tracking.treking_gps.R
 import com.tracking.treking_gps.android.StarterWorker
 import com.tracking.treking_gps.domain.data.TransportType
 import com.tracking.treking_gps.ui.FragmentButterKnife
-import com.tracking.treking_gps.ui.SimpleAdapterViewItemSelectedListener
+import com.tracking.treking_gps.ui.SimpleItemSelectListener
 import com.tracking.treking_gps.utils.SimpleObserver
 
 class TrackingSettingsFragment : FragmentButterKnife() {
@@ -34,11 +34,13 @@ class TrackingSettingsFragment : FragmentButterKnife() {
     @BindView(R.id.statusView)
     lateinit var statusView: TextView
 
-    lateinit var transportTypeValues: List<String>
-    lateinit var transportTypeTitles: List<String>
-    var routeNumbers: List<String> = emptyList()
-    lateinit var transportTypeSpinnerAdapter: ArrayAdapter<String>
-    lateinit var routeNumberSpinnerAdapter: ArrayAdapter<String>
+    private lateinit var transportTypeValues: List<String>
+    private lateinit var transportTypeTitles: List<String>
+    private lateinit var minibusRouteNumbers: List<String>
+    private lateinit var trolleybusRouteNumbers: List<String>
+    private var routeNumbers: List<String> = emptyList()
+    private lateinit var transportTypeSpinnerAdapter: ArrayAdapter<String>
+    private lateinit var routeNumberSpinnerAdapter: ArrayAdapter<String>
 
     private val viewModel: TrackingSettingsViewModel by viewModels()
 
@@ -51,7 +53,7 @@ class TrackingSettingsFragment : FragmentButterKnife() {
 
     private fun listeningWorkerState() {
         StarterWorker.getEnabledLiveData(context)
-                .observe(this, Observer { value: Boolean? -> onWorkerEnabledChanged(value) })
+                .observe(this, Observer { onWorkerEnabledChanged(it) })
     }
 
     private fun onWorkerEnabledChanged(value: Boolean?) {
@@ -62,7 +64,9 @@ class TrackingSettingsFragment : FragmentButterKnife() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        viewListeners()
+        initNameFieldListeners()
+        initTransportTypeSpinnerListeners()
+        initTransportRouteNumberSpinnerListeners()
         initDataListeners()
     }
 
@@ -70,29 +74,45 @@ class TrackingSettingsFragment : FragmentButterKnife() {
         toolbar.setTitle(R.string.tracking_settings_title)
 
         transportTypeValues = listOf(TransportType.MINIBUS, TransportType.TROLLEYBUS)
-        transportTypeTitles = resources.getStringArray(R.array.transport_types)
-                .toList()
+        transportTypeTitles = resources.getStringArray(R.array.transport_types).toList()
+        minibusRouteNumbers = resources.getStringArray(R.array.minibus_route_numbers).toList()
+        trolleybusRouteNumbers = resources.getStringArray(R.array.trolleybus_route_numbers).toList()
 
-        transportTypeSpinnerAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item)
+        transportTypeSpinnerAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item)
         transportTypeSpinner.adapter = transportTypeSpinnerAdapter
         transportTypeSpinnerAdapter.clear()
         transportTypeSpinnerAdapter.addAll(transportTypeTitles)
 
-        routeNumberSpinnerAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item)
+        routeNumberSpinnerAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item)
         transportRouteNumberSpinner.adapter = routeNumberSpinnerAdapter
     }
 
-    private fun viewListeners() {
-        nameField.doOnTextChanged { text, _, _, _ ->
-            viewModel.setName(text.toString() ?: "")
+    private fun initNameFieldListeners() {
+        nameField.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                viewModel.setName(nameField.text.toString().trim())
+            }
         }
+        nameField.setOnKeyListener { _, _, keyEvent ->
+            when {
+                keyEvent.keyCode == KeyEvent.KEYCODE_NAVIGATE_NEXT && keyEvent.action == KeyEvent.ACTION_UP -> {
+                    viewModel.setName(nameField.text.toString().trim())
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 
-        transportTypeSpinner.onItemSelectedListener = SimpleAdapterViewItemSelectedListener { index ->
+    private fun initTransportTypeSpinnerListeners() {
+        transportTypeSpinner.onItemSelectedListener = SimpleItemSelectListener { index ->
             transportTypeValues.getOrNull(index)
                     ?.also { viewModel.setTransportType(it) }
         }
+    }
 
-        transportRouteNumberSpinner.onItemSelectedListener = SimpleAdapterViewItemSelectedListener { index ->
+    private fun initTransportRouteNumberSpinnerListeners() {
+        transportRouteNumberSpinner.onItemSelectedListener = SimpleItemSelectListener { index ->
             routeNumbers.getOrNull(index)
                     ?.also { viewModel.setRouteNumber(it) }
         }
@@ -110,36 +130,45 @@ class TrackingSettingsFragment : FragmentButterKnife() {
             nameField.setText(data.name)
         }
 
-        val typeIndex = transportTypeValues.indexOf(data.transportType)
+        updateTransportType(data.transportType)
+        updateTransportRouteNumbers(data.transportType)
+        updateRouteNumber(data.routeNumber)
+
+        startTrackingButton.isEnabled = data.isValid
+    }
+
+    private fun updateTransportType(transportType: String) {
+        val typeIndex = transportTypeValues.indexOf(transportType)
         val typeSelectedPosition = transportTypeSpinner.selectedItemPosition
         val transportTypeChanged = typeIndex != typeSelectedPosition
-                && typeIndex < routeNumberSpinnerAdapter.count
+                && typeIndex < transportTypeSpinner.count
         if (transportTypeChanged) {
             transportTypeSpinner.setSelection(typeIndex)
         }
+    }
 
-        val needRefillTransportRouteNumbers = typeIndex != typeSelectedPosition
-                || routeNumberSpinnerAdapter.isEmpty
-        if (needRefillTransportRouteNumbers) {
-            refillTransportRouteNumbers(data.transportType)
+    private fun updateTransportRouteNumbers(transportType: String) {
+        val numbers = when (transportType) {
+            TransportType.MINIBUS -> minibusRouteNumbers
+            TransportType.TROLLEYBUS -> trolleybusRouteNumbers
+            else -> emptyList()
         }
+        if (routeNumbers != numbers) {
+            routeNumbers = numbers
+            routeNumberSpinnerAdapter.clear()
+            routeNumberSpinnerAdapter.addAll(routeNumbers)
+            routeNumberSpinnerAdapter.notifyDataSetChanged()
+            transportRouteNumberSpinner.setSelection(-1)
+        }
+    }
 
-        val routeNumberIndex = routeNumbers.indexOf(data.routeNumber)
+    private fun updateRouteNumber(routeNumber: String) {
+        val routeNumberIndex = routeNumbers.indexOf(routeNumber)
         val routeNumberSelectedPosition = transportRouteNumberSpinner.selectedItemPosition
         val routeNumberChanged = routeNumberIndex != routeNumberSelectedPosition
                 && routeNumberIndex < transportTypeSpinnerAdapter.count
         if (routeNumberChanged) {
             transportRouteNumberSpinner.setSelection(routeNumberIndex)
-        }
-
-        startTrackingButton.isEnabled = data.isValid
-    }
-
-    private fun refillTransportRouteNumbers(transportType: String) {
-        routeNumbers = when (transportType) {
-            TransportType.MINIBUS -> resources.getStringArray(R.array.minibus_route_numbers).toList()
-            TransportType.TROLLEYBUS -> resources.getStringArray(R.array.trolleybus_route_numbers).toList()
-            else -> emptyList()
         }
     }
 

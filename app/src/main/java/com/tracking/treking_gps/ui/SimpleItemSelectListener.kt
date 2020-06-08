@@ -3,7 +3,7 @@ package com.tracking.treking_gps.ui
 import android.view.View
 import android.widget.AdapterView
 
-class SimpleAdapterViewItemSelectedListener(
+class SimpleItemSelectListener(
         private val handle: (index: Int) -> Unit
 ): AdapterView.OnItemSelectedListener {
 

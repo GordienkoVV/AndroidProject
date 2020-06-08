@@ -16,17 +16,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/SpaceMiddle"
-        app:layout_constraintTop_toBottomOf="@id/appbar"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd">
+        app:layout_constraintTop_toBottomOf="@id/appbar">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/transportNameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/transportName"
-            tools:text="example value"
-            />
+            android:imeOptions="actionNext"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:focusable="true"
+            tools:text="example value" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,45 +41,45 @@
         android:layout_marginTop="@dimen/SpaceMiddle"
         android:text="@string/transport_type"
         android:textAppearance="@style/AppTheme.TextAppearance.Caption"
-        app:layout_constraintTop_toBottomOf="@+id/transportNameInputLayout"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintHorizontal_bias="0"
-        />
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/transportNameInputLayout" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/transportTypeSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/SpaceTiny"
-        app:layout_constraintTop_toBottomOf="@id/transportTypeLabel"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        android:paddingTop="@dimen/SpaceMiddle"
+        android:paddingBottom="@dimen/SpaceMiddle"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-         />
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/transportTypeLabel" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/transportRouteNumberLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/SpaceMiddle"
-        android:textAppearance="@style/AppTheme.TextAppearance.Caption"
         android:text="@string/route_number_label"
-        app:layout_constraintTop_toBottomOf="@id/transportTypeSpinner"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        android:textAppearance="@style/AppTheme.TextAppearance.Caption"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintHorizontal_bias="0"
-        />
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/transportTypeSpinner" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/transportRouteNumberSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/SpaceTiny"
-        app:layout_constraintTop_toBottomOf="@id/transportRouteNumberLabel"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        android:paddingTop="@dimen/SpaceMiddle"
+        android:paddingBottom="@dimen/SpaceMiddle"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintHorizontal_bias="0"
-        />
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/transportRouteNumberLabel" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/startTrackingButton"
@@ -87,13 +91,12 @@
         android:text="@string/tracking_start"
         android:textSize="14sp"
         app:backgroundTint="@color/positive"
-        app:layout_constraintTop_toBottomOf="@id/transportRouteNumberSpinner"
         app:layout_constraintBottom_toTopOf="@id/stopTrackingButton"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/transportRouteNumberSpinner"
         app:layout_constraintVertical_bias="0.5"
-        />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/stopTrackingButton"
@@ -103,13 +106,12 @@
         android:layout_marginBottom="60dp"
         android:text="@string/tracking_stop"
         app:backgroundTint="@color/negative"
+        app:layout_constraintBottom_toTopOf="@id/statusView"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/startTrackingButton"
-        app:layout_constraintBottom_toTopOf="@id/statusView"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintVertical_bias="0.5"
-        />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/statusView"
@@ -121,8 +123,8 @@
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/stopTrackingButton"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@id/guidelineBottom"
