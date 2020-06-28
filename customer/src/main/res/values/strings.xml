@@ -2,4 +2,46 @@
     <string name="app_name">Maps</string>
     <string name="title_activity_maps">Map</string>
     <string name="test">Test</string>
+
+    <string name="route_number_label">Номер маршрута:</string>
+    <string name="transport_type">Вид транспорта:</string>
+    <string name="transportName">Имя</string>
+    <string-array name="transport_types">
+        <item>Маршрутка</item>
+        <item>Троллейбус</item>
+    </string-array>
+    <string-array name="route_numbers">
+        <item>1</item>
+        <item>1a</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4a</item>
+        <item>5</item>
+        <item>5a</item>
+        <item>6</item>
+        <item>7</item>
+        <item>7a</item>
+        <item>8</item>
+        <item>9</item>
+        <item>9a</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>12a</item>
+        <item>14</item>
+        <item>14a</item>
+        <item>15</item>
+        <item>16</item>
+        <item>19</item>
+        <item>19a</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+    </string-array>
+
+    <string name="route_1">e`||GuulsDeEsAoD@FjB~AB`ECxl@Yf@qHJcLa@eKoF{fAcIakA`Uwc@aAiiAsAih@cBm{@qVQ_NHgNmA{Gk[mAG[zC`EdB</string>
+    <string name="route_2">ql||GoulsDzv@UFAd@kJA}FUkHm@mM{@eTkDmr@}D}g@g@wZpGqM`IcOt@sDg@uf@u@}YGyQi@oViAce@UaJc@iR_@m[UkO~[up@ma@_j@i@uA{CkXqBuLoDaF`@qC`H{Efe@aYiDcOmNyMwArDwSrl@aF~M|AjA??lD~ElBvJxCjZr@lAtVl\\m\\lp@jJfM</string>
+    <string name="route_3">ut||GqzysDy@}DwAOE`D|CtAnDtP`A~AbMvBjN?m@ih@Pk@vJcRr[}p@uV}[y@yCeFmb@mB{D{@gACkA\\}BtO{IpNcJtM{IsCkMkOuNgd@cm@gR?iBcAYf@C~@t@`@x@e@??X]`RM`d@dm@yXbx@{AzDk@zApBtB</string>
+    <string name="route_15">u`||G{ulsD|@ZnB?de@Ud@sARiGBwIcCsn@{D{p@yF{u@sAwr@sC}jBk_BpRuFucA`]yxB~B{Dlb@uBrm@sW{Fsb@gAcDgCyD\\cCrCgBjIyEr_@yVsDqNiNsMi]f`AzBnDvBzDjGbd@qA`Awi@fUge@tDeEjSgY`jB`GlbARf@~gAgOfNiAlFUzA~}@tAnw@nArf@lFlx@vCbk@dCtk@RrK]nLgKPa]^m@Q</string>
 </resources>
