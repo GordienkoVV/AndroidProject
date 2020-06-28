@@ -3,4 +3,32 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorRoute1">#CA1414</color>
+    <color name="colorRoute1a">#850000</color>
+    <color name="colorRoute2">#1343BF</color>
+    <color name="colorRoute3">#AC970E</color>
+    <color name="colorRoute4">#0BA668</color>
+    <color name="colorRoute4a">#05653F</color>
+    <color name="colorRoute5">#ED7A15</color>
+    <color name="colorRoute5a">#9E510E</color>
+    <color name="colorRoute6">#82E420</color>
+    <color name="colorRoute7">#44AE46</color>
+    <color name="colorRoute7a">#286329</color>
+    <color name="colorRoute8">#FFFC00</color>
+    <color name="colorRoute9">#7824C1</color>
+    <color name="colorRoute9a">#371159</color>
+    <color name="colorRoute10">#CC3483</color>
+    <color name="colorRoute11">#7A624F</color>
+    <color name="colorRoute12">#2A7B7E</color>
+    <color name="colorRoute12a">#103032</color>
+    <color name="colorRoute14">#002BFF</color>
+    <color name="colorRoute14a">#001997</color>
+    <color name="colorRoute15">#27DC12</color>
+    <color name="colorRoute16">#75952E</color>
+    <color name="colorRoute19">#FFD285</color>
+    <color name="colorRoute19a">#887046</color>
+    <color name="colorRoute20">#FF9696</color>
+    <color name="colorRoute21">#5A1FAC</color>
+    <color name="colorRoute22">#120622</color>
 </resources>
